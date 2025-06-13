@@ -67,36 +67,122 @@ Your work will be automatically submitted when you push to your GitHub Classroom
 Open the server.js file and click run on the file. 
 Open the terminal and head to link at which the server is running at.
 
-###Endpoints example 
+## 📘 Endpoints
 
-#GET /api/products
-Description: Returns a list of all products.
-Request: No body or parameters required.
-Response: [
+### 🟢 `GET /`
+
+- **Description:** Welcome message and brief instructions.
+- **Response:** `200 OK`
+  ```text
+  Welcome to the Product API! Go to /api/products to see all products.
+  ```
+
+---
+
+### 🟢 `GET /api/products`
+
+- **Description:** Get a list of all products.
+- **Response:** `200 OK`
+  ```json
+  [
+    {
+      "id": "1",
+      "name": "Laptop",
+      "description": "High-performance laptop with 16GB RAM",
+      "price": 1200,
+      "category": "electronics",
+      "inStock": true
+    },
+    ...
+  ]
+  ```
+
+---
+
+### 🟢 `GET /api/products/:id`
+
+- **Description:** Get a specific product by ID.
+- **Params:** `id` (string) – Product ID
+- **Responses:**
+  - `200 OK` – Product found
+  - `404 Not Found` – Product not found
+
+---
+
+### 🟡 `POST /api/products`
+
+- **Description:** Add a new product.
+- **Request Body (JSON):**
+  ```json
   {
-    "id": "1",
-    "name": "Laptop",
-    "description": "High-performance laptop with 16GB RAM",
-    "price": 1200,
+    "id": "4",
+    "name": "Headphones",
+    "description": "Noise-cancelling headphones",
+    "price": 150,
     "category": "electronics",
     "inStock": true
-  },
-  ...
-]
+  }
+  ```
+- **Responses:**
+  - `201 Created` – Product added
+  - `400 Bad Request` – Missing fields or duplicate ID
 
-#GET /api/products/:id
-Description: Get a specific product by ID.
-Parameters:
-id (string) — The product’s unique ID.
-Response: {
-  "id": "2",
-  "name": "Smartphone",
-  "description": "Latest model with 128GB storage",
-  "price": 800,
-  "category": "electronics",
-  "inStock": true
-}
+---
 
-Status Codes:
-200 OK – Product found.
-404 Not Found – No product with that ID.
+### 🟠 `PUT /api/products/:id`
+
+- **Description:** Update a product's details.
+- **Params:** `id` (string) – Product ID
+- **Request Body (JSON):** Any fields you want to update.
+  ```json
+  {
+    "price": 1350,
+    "inStock": false
+  }
+  ```
+- **Responses:**
+  - `200 OK` – Product updated
+  - `404 Not Found` – Product not found
+
+---
+
+### 🔴 `DELETE /api/products/:id`
+
+- **Description:** Delete a product by ID.
+- **Params:** `id` (string) – Product ID
+- **Response:**
+  ```json
+  {
+    "message": "Product deleted",
+    "product": {
+      "id": "2",
+      "name": "Smartphone",
+      ...
+    }
+  }
+  ```
+- **Responses:**
+  - `200 OK` – Product deleted
+  - `404 Not Found` – Product not found
+
+---
+
+### 🔐 `GET /protected`
+
+- **Description:** A sample protected route.
+- **Headers Required:**
+  ```
+  x-api-key: mysecretkey
+  ```
+- **Response:**
+  - `200 OK` – If correct API key is provided.
+  - `401 Unauthorized` – If API key is missing or incorrect.
+
+---
+
+## 🚨 Error Responses
+
+- `400 Bad Request` – Missing or invalid data
+- `404 Not Found` – Resource does not exist
+- `401 Unauthorized` – Missing or invalid API key (for protected routes)
+- `500 Internal Server Error` – Something went wrong
