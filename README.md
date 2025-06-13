@@ -61,3 +61,42 @@ Your work will be automatically submitted when you push to your GitHub Classroom
 - [Express.js Documentation](https://expressjs.com/)
 - [RESTful API Design Best Practices](https://restfulapi.net/)
 - [HTTP Status Codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status) 
+
+
+###How to run server
+Open the server.js file and click run on the file. 
+Open the terminal and head to link at which the server is running at.
+
+###Endpoints example 
+
+#GET /api/products
+Description: Returns a list of all products.
+Request: No body or parameters required.
+Response: [
+  {
+    "id": "1",
+    "name": "Laptop",
+    "description": "High-performance laptop with 16GB RAM",
+    "price": 1200,
+    "category": "electronics",
+    "inStock": true
+  },
+  ...
+]
+
+#GET /api/products/:id
+Description: Get a specific product by ID.
+Parameters:
+id (string) — The product’s unique ID.
+Response: {
+  "id": "2",
+  "name": "Smartphone",
+  "description": "Latest model with 128GB storage",
+  "price": 800,
+  "category": "electronics",
+  "inStock": true
+}
+
+Status Codes:
+200 OK – Product found.
+404 Not Found – No product with that ID.

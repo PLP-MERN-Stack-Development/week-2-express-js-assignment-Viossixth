@@ -49,7 +49,7 @@ app.get('/', (req, res) => {
 // GET /api/products - Get all products
 app.get('/api/products', (req, res) => {
   const productNames = products.map(product => product.name);
-  res.json(names);
+  res.json(productNames);
 });
 // GET /api/products/:id - Get a specific product
 app.get('/api/products/:id',(req,res) => {
@@ -76,7 +76,7 @@ app.post('/api/products',(req,res) => {
 app.put('/api/products/:id',(req,res) =>{
   const product = products.find(p => p.id === req.params.id);
   if (!product) return res.status(404).send('Product Not Found');
-  object.assign(products,req.body);
+  Object.assign(products, req.body);
   res.json(product);
 });
 // DELETE /api/products/:id - Delete a product
@@ -115,7 +115,7 @@ function authMiddleware(req, res, next) {
 }
 
 
-app.use('/',authMiddleware,(req,res,next) => {
+app.get('/protected',authMiddleware,(req,res,next) => {
   res.send('You accessed a protected route!');
 });
 
